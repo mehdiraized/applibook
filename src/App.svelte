@@ -1,5 +1,4 @@
 <script>
-	import Login from './Login.svelte';
 	import Dashboard from './Dashboard.svelte';
 	import 'carbon-components-svelte/css/all.css';
 	// import '/global.css';
@@ -16,7 +15,7 @@
 <style>
 	main {
 		display: flex;
-		height: 100%;
+		height: auto;
 		width: 100%;
 	}
 </style>

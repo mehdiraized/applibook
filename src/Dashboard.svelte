@@ -3,6 +3,10 @@
 	import { readFile, utils } from 'xlsx';
 	import { liveQuery } from 'dexie';
 	import {
+		Grid,
+		Row,
+		Column,
+		Tile,
 		DataTable,
 		Toolbar,
 		ToolbarContent,
@@ -59,7 +63,7 @@
 		dataDelete = false,
 		pageSize = 10,
 		page = 0,
-		showImportData = true,
+		showImportData = false,
 		childrenData = [],
 		fileForImport = null;
 
@@ -67,7 +71,28 @@
 </script>
 
 <section class="dashboard">
-	{#if $rows}
+	<div class="books">
+		{#each new Array(100) as item}
+			<div class="booksItem">
+				<div class="book">
+					<figure class="bookCover">
+						<img src="./mockup.png" alt="" />
+						<img src="./img/Cover.png" alt="" />
+					</figure>
+					<div class="bookContent">
+						<h4>اسم کتاب</h4>
+						<div>
+							<p>سال انتشار <b>۱۳۶۰</b></p>
+							<p>انتشارات <b>فخیم</b></p>
+							<p>نویسنده <b>عبد الله موحد</b></p>
+						</div>
+					</div>
+				</div>
+			</div>
+		{/each}
+	</div>
+
+	<!-- {#if $rows}
 		<DataTable
 			style="width:100%"
 			title="لیست کارکنان"
@@ -266,7 +291,7 @@
 		>
 			<p>با حذف {dataDelete.name} {dataDelete.family} اطلاعات این کارمند قابل بازگشت نیست.</p>
 		</Modal>
-	{/if}
+	{/if} -->
 	<Modal
 		bind:open={showImportData}
 		modalHeading="وارد کردن اطلاعات"
@@ -313,10 +338,88 @@
 
 <style>
 	.dashboard {
+		display: flex;
 		width: 100%;
-		height: 100%;
-		background-color: var(--cds-layer, #f4f4f4);
-		padding: 0 15px;
+		height: auto;
+		/* background-color: var(--cds-layer, #fff); */
+	}
+	.books {
+		display: flex;
+		padding: 20px 20px 0 0;
+		flex-wrap: wrap;
+		width: 100%;
+		height: auto;
+	}
+	.booksItem {
+		width: 20%;
+		padding-bottom: 20px;
+		padding-left: 20px;
+	}
+	@media (max-width: 1100px) {
+		.booksItem {
+			width: 25%;
+		}
+	}
+	@media (max-width: 900px) {
+		.booksItem {
+			width: 33.33%;
+		}
+	}
+	@media (max-width: 600px) {
+		.booksItem {
+			width: 50%;
+		}
+	}
+	@media (max-width: 400px) {
+		.booksItem {
+			width: 100%;
+		}
+	}
+	.book {
+		background-color: #f4f4f4;
+	}
+	.bookCover {
+		height: auto;
+		width: 100%;
+		position: relative;
+		margin-bottom: 10px;
+	}
+	.bookCover img:nth-child(1) {
+		width: 100%;
+		height: auto;
+	}
+	.bookCover img:nth-child(2) {
+		width: 100%;
+		height: auto;
+		padding: 0 34.1%;
+		position: absolute;
+		top: 0;
+		right: 0;
+		left: 0;
+		bottom: 0;
+		margin: auto;
+	}
+	.bookContent {
+		padding: 0 20px 5px;
+	}
+	.bookContent h4 {
+		font-weight: bold;
+		margin-bottom: 10px;
+	}
+	.bookContent p {
+		color: #1d1d1d;
+		font-size: 13px;
+		padding: 0 2.5px;
+		margin-bottom: 5px;
+	}
+	.bookContent div {
+		display: flex;
+		margin: 0 -2.5px;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+	.bookContent b {
+		font-weight: bold;
 	}
 	.showUserHeader {
 		font-size: 26px;
