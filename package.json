@@ -1,0 +1,80 @@
+{
+	"name": "applibook",
+	"version": "1.0.0",
+	"description": "Manage Booking book in library",
+	"private": false,
+	"license": "MIT",
+	"main": "main.js",
+	"author": "Mehdi Rezaei <mehdiraized@gmail.com>",
+	"build": {
+		"appId": "com.mehdir.applibook",
+		"icon": "./public/favicon.png",
+		"productName": "Applibook",
+		"copyright": "© Mehdir - Mehdi Rezaei",
+		"files": [
+			"public/**/*",
+			"main.js",
+			"preload.js"
+		],
+		"win": {
+			"target": [
+				{
+					"target": "zip",
+					"arch": [
+						"x64"
+					]
+				},
+				{
+					"target": "portable",
+					"arch": [
+						"x64"
+					]
+				}
+			],
+			"icon": "./public/favicon.ico"
+		},
+		"linux": {},
+		"mac": {}
+	},
+	"scripts": {
+		"build": "rollup -c --bundleConfigAsCjs",
+		"dev": "rollup -c -w --bundleConfigAsCjs",
+		"start": "sirv public --no-clear",
+		"electron": "wait-on http://localhost:8080 && electron .",
+		"electron-dev": "concurrently \"yarn run dev\" \"yarn run electron\"",
+		"preelectron-pack": "yarn run build",
+		"electron-pack": "electron-builder",
+		"electron-pack-all": "electron-builder -mwl",
+		"java": "java -jar jsign-4.2.jar --keystore ./hardwareToken.cfg --storepass 'mehdi123' --storetype PKCS11 --tsaurl http://timestamp.digicert.com --alias /link/to/cert.pem"
+	},
+	"dependencies": {
+		"dexie": "^3.2.4",
+		"electron-serve": "^1.1.0",
+		"svelte-forms": "^2.3.1",
+		"xlsx": "https://cdn.sheetjs.com/xlsx-0.20.0/xlsx-0.20.0.tgz"
+	},
+	"devDependencies": {
+		"@rollup/plugin-commonjs": "^25.0.2",
+		"@rollup/plugin-node-resolve": "^15.1.0",
+		"carbon-components-svelte": "^0.76.0",
+		"carbon-icons-svelte": "^11.4.0",
+		"carbon-preprocess-svelte": "^0.9.1",
+		"concurrently": "^7.5.0",
+		"electron": "^21.2.0",
+		"electron-builder": "^23.6.0",
+		"eslint": "^8.43.0",
+		"eslint-config-prettier": "^8.8.0",
+		"eslint-plugin-svelte3": "^4.0.0",
+		"fs": "^0.0.1-security",
+		"prettier": "^2.8.8",
+		"prettier-plugin-svelte": "^2.10.1",
+		"rollup": "^3.25.1",
+		"rollup-plugin-css-only": "^4.3.0",
+		"rollup-plugin-livereload": "^2.0.5",
+		"rollup-plugin-svelte": "^7.1.5",
+		"rollup-plugin-terser": "^7.0.2",
+		"sirv-cli": "^2.0.2",
+		"svelte": "^4.0.0",
+		"wait-on": "^6.0.1"
+	}
+}

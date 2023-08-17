@@ -1,0 +1,166 @@
+@font-face {
+	font-family: 'IRANYekanRegular';
+	font-style: normal;
+	src: url('./fonts/IRANYekanRegular.eot');
+	src: url('./fonts/IRANYekanRegular.woff2') format('woff2'),
+		url('./fonts/IRANYekanRegular.woff') format('woff'),
+		url('./fonts/IRANYekanRegular.ttf') format('truetype');
+}
+
+html,
+body {
+	position: relative;
+	width: 100%;
+	height: 100%;
+}
+
+body {
+	margin: 0;
+	padding: 8px;
+	box-sizing: border-box;
+	font-family: 'IRANYekanRegular', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+		Oxygen-Sans, Ubuntu, Cantarell, 'Helvetica Neue', sans-serif !important;
+	direction: rtl;
+}
+
+a {
+	color: rgb(0, 100, 200);
+	text-decoration: none;
+}
+
+a:hover {
+	text-decoration: underline;
+}
+
+a:visited {
+	color: rgb(0, 80, 160);
+}
+
+label {
+	display: block;
+}
+
+input,
+button,
+select,
+textarea {
+	font-family: inherit;
+	font-size: inherit;
+	-webkit-padding: 0.4em 0;
+	padding: 0.4em;
+	margin: 0 0 0.5em 0;
+	box-sizing: border-box;
+	border: 1px solid #ccc;
+	border-radius: 2px;
+}
+
+input:disabled {
+	color: #ccc;
+}
+
+button {
+	color: #333;
+	background-color: #f4f4f4;
+	outline: none;
+}
+
+button:disabled {
+	color: #999;
+}
+
+button:not(:disabled):active {
+	background-color: #ddd;
+}
+
+button:focus {
+	border-color: #666;
+}
+
+.uiLtr {
+	direction: ltr;
+}
+.bx--label.bx--label {
+	font-size: 13px;
+	font-weight: bold;
+}
+
+.bx--data-table th,
+.bx--data-table td {
+	text-align: right !important;
+}
+
+.bx--data-table td:last-child,
+.bx--data-table tbody th:last-child {
+	padding: 0;
+}
+
+.bx--modal-close {
+	right: unset !important;
+	left: 0 !important;
+}
+.bx--modal-header {
+	padding-right: var(--cds-spacing-05, 1rem) !important;
+	padding-left: var(--cds-spacing-09, 3rem) !important;
+}
+
+.bx--modal-content p,
+.bx--modal-content__regular-content {
+	padding-right: unset !important;
+	padding-left: 20%;
+}
+
+.bx--select-input {
+	padding: 0 var(--cds-spacing-05, 1rem) 0 var(--cds-spacing-09, 3rem) !important;
+}
+.bx--select__arrow {
+	right: unset !important;
+	left: var(--cds-spacing-05, 1rem);
+	margin-top: -3px;
+}
+
+.bx--toggle__text--off,
+.bx--toggle__text--on {
+	margin-left: 0 !important;
+	margin-right: 3.5rem;
+}
+
+.bx--number input[type='number'] {
+	padding-right: 1rem !important;
+	padding-left: 8rem !important;
+}
+.bx--number--nosteppers input[type='number'] {
+	padding-right: 1rem !important;
+	padding-left: 3rem !important;
+}
+.bx--structured-list-th {
+	text-align: right !important;
+}
+.uiRadioTileFlex > div {
+	display: flex;
+}
+.uiRadioTileFlex > div .bx--tile {
+	height: 40px;
+	min-height: 40px;
+	padding: 10px 3rem 0rem 1rem !important;
+}
+.uiRadioTileFlex > div .bx--tile__checkmark {
+	top: 10px !important;
+}
+.bx--structured-list {
+	margin-bottom: 1rem !important;
+}
+.bx--modal-content {
+	margin-bottom: 2rem !important;
+}
+.bx--text-input__invalid-icon,
+.bx--text-input__readonly-icon {
+	top: calc(50% - 4px) !important;
+}
+.bx--select-input__wrapper[data-invalid] .bx--select-input,
+.bx--select--warning .bx--select-input {
+	padding-right: 2.5rem !important;
+}
+.bx--select__invalid-icon {
+	right: 1rem;
+	top: 11px;
+}
