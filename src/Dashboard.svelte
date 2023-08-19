@@ -71,6 +71,37 @@
 </script>
 
 <section class="dashboard">
+	<Toolbar>
+		<ToolbarContent>
+			<ToolbarSearch />
+			<ToolbarMenu>
+				<ToolbarMenuItem primaryFocus>نسخه پشتیبان</ToolbarMenuItem>
+				<ToolbarMenuItem
+					on:click={() => {
+						showImportData = true;
+					}}
+				>
+					وارد کردن کتاب
+				</ToolbarMenuItem>
+				<ToolbarMenuItem
+					on:click={() => {
+						openDeveloper = true;
+					}}
+				>
+					درباره سازنده
+				</ToolbarMenuItem>
+			</ToolbarMenu>
+			<Button
+				on:click={() => {
+					dataUpdate = false;
+					open = true;
+				}}
+				icon={Add}
+			>
+				افزودن کارمند
+			</Button>
+		</ToolbarContent>
+	</Toolbar>
 	<div class="books">
 		{#each new Array(100) as item}
 			<div class="booksItem">
@@ -169,37 +200,6 @@
 					{cell.value}
 				{/if}
 			</svelte:fragment>
-			<Toolbar>
-				<ToolbarContent>
-					<ToolbarSearch />
-					<ToolbarMenu>
-						<ToolbarMenuItem primaryFocus>نسخه پشتیبان</ToolbarMenuItem>
-						<ToolbarMenuItem
-							on:click={() => {
-								showImportData = true;
-							}}
-						>
-							وارد کردن کتاب
-						</ToolbarMenuItem>
-						<ToolbarMenuItem
-							on:click={() => {
-								openDeveloper = true;
-							}}
-						>
-							درباره سازنده
-						</ToolbarMenuItem>
-					</ToolbarMenu>
-					<Button
-						on:click={() => {
-							dataUpdate = false;
-							open = true;
-						}}
-						icon={Add}
-					>
-						افزودن کارمند
-					</Button>
-				</ToolbarContent>
-			</Toolbar>
 		</DataTable>
 		<div style="direction:ltr; display: flex; justify-content: center;">
 			<PaginationNav
