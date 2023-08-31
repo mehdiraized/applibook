@@ -71,56 +71,58 @@
 </script>
 
 <section class="dashboard">
-	<Toolbar>
-		<ToolbarContent>
-			<ToolbarSearch />
-			<ToolbarMenu>
-				<ToolbarMenuItem primaryFocus>نسخه پشتیبان</ToolbarMenuItem>
-				<ToolbarMenuItem
+	<div>
+		<Toolbar>
+			<ToolbarContent>
+				<ToolbarSearch placeholder="جستجو کتاب : نام کتاب یا نویسنده" />
+				<ToolbarMenu>
+					<ToolbarMenuItem primaryFocus>نسخه پشتیبان</ToolbarMenuItem>
+					<ToolbarMenuItem
+						on:click={() => {
+							showImportData = true;
+						}}
+					>
+						وارد کردن کتاب
+					</ToolbarMenuItem>
+					<ToolbarMenuItem
+						on:click={() => {
+							openDeveloper = true;
+						}}
+					>
+						درباره سازنده
+					</ToolbarMenuItem>
+				</ToolbarMenu>
+				<Button
 					on:click={() => {
-						showImportData = true;
+						dataUpdate = false;
+						open = true;
 					}}
+					icon={Add}
 				>
-					وارد کردن کتاب
-				</ToolbarMenuItem>
-				<ToolbarMenuItem
-					on:click={() => {
-						openDeveloper = true;
-					}}
-				>
-					درباره سازنده
-				</ToolbarMenuItem>
-			</ToolbarMenu>
-			<Button
-				on:click={() => {
-					dataUpdate = false;
-					open = true;
-				}}
-				icon={Add}
-			>
-				افزودن کارمند
-			</Button>
-		</ToolbarContent>
-	</Toolbar>
-	<div class="books">
-		{#each new Array(100) as item}
-			<div class="booksItem">
-				<div class="book">
-					<figure class="bookCover">
-						<img src="./mockup.png" alt="" />
-						<img src="./img/Cover.png" alt="" />
-					</figure>
-					<div class="bookContent">
-						<h4>اسم کتاب</h4>
-						<div>
-							<p>سال انتشار <b>۱۳۶۰</b></p>
-							<p>انتشارات <b>فخیم</b></p>
-							<p>نویسنده <b>عبد الله موحد</b></p>
+					افزودن کتاب
+				</Button>
+			</ToolbarContent>
+		</Toolbar>
+		<div class="books">
+			{#each new Array(100) as item}
+				<div class="booksItem">
+					<div class="book">
+						<figure class="bookCover">
+							<img src="./mockup.png" alt="" />
+							<img src="./img/Cover.png" alt="" />
+						</figure>
+						<div class="bookContent">
+							<h4>اسم کتاب</h4>
+							<div>
+								<p>سال انتشار <b>۱۳۶۰</b></p>
+								<p>انتشارات <b>فخیم</b></p>
+								<p>نویسنده <b>عبد الله موحد</b></p>
+							</div>
 						</div>
 					</div>
 				</div>
-			</div>
-		{/each}
+			{/each}
+		</div>
 	</div>
 
 	<!-- {#if $rows}
@@ -218,7 +220,7 @@
 		<Modal
 			bind:open={openUser}
 			size="lg"
-			modalHeading="نمایش اطلاعات کارمند"
+			modalHeading="نمایش اطلاعات کتاب"
 			primaryButtonText="چاپ"
 			primaryButtonIcon={Printer}
 			secondaryButtonText="بستن"
@@ -276,7 +278,7 @@
 		<Modal
 			danger
 			bind:open={openDelete}
-			modalHeading="آیا مایلید این کارمند را حذف کنید ؟"
+			modalHeading="آیا مایلید این کتاب را حذف کنید ؟"
 			primaryButtonText="حذف"
 			primaryButtonIcon={TrashCan}
 			secondaryButtonText="بستن"
@@ -289,7 +291,7 @@
 			}}
 			size="xs"
 		>
-			<p>با حذف {dataDelete.name} {dataDelete.family} اطلاعات این کارمند قابل بازگشت نیست.</p>
+			<p>با حذف {dataDelete.name} {dataDelete.family} اطلاعات این کتاب قابل بازگشت نیست.</p>
 		</Modal>
 	{/if} -->
 	<Modal
