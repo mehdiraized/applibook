@@ -17,15 +17,18 @@
 		Button,
 		Modal,
 		FileUploaderDropContainer,
-		FileUploaderItem
+		FileUploaderItem,
+		OverflowMenu,
+		OverflowMenuItem
 	} from 'carbon-components-svelte';
 	import Launch from 'carbon-icons-svelte/lib/Launch.svelte';
 	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
 	import Edit from 'carbon-icons-svelte/lib/Edit.svelte';
+	import Switcher from 'carbon-icons-svelte/lib/Switcher.svelte';
 	import Add from 'carbon-icons-svelte/lib/Add.svelte';
 	import Printer from 'carbon-icons-svelte/lib/Printer.svelte';
 	import DocumentImport from 'carbon-icons-svelte/lib/DocumentImport.svelte';
-	import AddUser from './Components/Add.svelte';
+	import AddUser from './Components/AddBook.svelte';
 	import Developer from './Components/Developer.svelte';
 	import { db } from './db';
 
@@ -55,7 +58,6 @@
 	// let filteredRowIds = $rows;
 
 	let open = false,
-		openDeveloper = false,
 		openUser = false,
 		openDelete = false,
 		dataUser = false,
@@ -65,18 +67,23 @@
 		page = 0,
 		showImportData = false,
 		childrenData = [],
-		fileForImport = null;
+		fileForImport = null,
+		filteredRowIds = [];
 
 	// $: console.log('filteredRowIds', filteredRowIds);
 </script>
 
-<section class="dashboard">
-	<div>
-		<Toolbar>
+<section class="peopleBox">
+	<!-- <div>
+		<Toolbar size="lg">
 			<ToolbarContent>
-				<ToolbarSearch placeholder="جستجو کتاب : نام کتاب یا نویسنده" />
+				<ToolbarSearch
+					placeholder="جستجو کتاب (نام کتاب یا نویسنده)"
+					persistent
+					value=""
+					bind:filteredRowIds
+				/>
 				<ToolbarMenu>
-					<ToolbarMenuItem primaryFocus>نسخه پشتیبان</ToolbarMenuItem>
 					<ToolbarMenuItem
 						on:click={() => {
 							showImportData = true;
@@ -84,13 +91,7 @@
 					>
 						وارد کردن کتاب
 					</ToolbarMenuItem>
-					<ToolbarMenuItem
-						on:click={() => {
-							openDeveloper = true;
-						}}
-					>
-						درباره سازنده
-					</ToolbarMenuItem>
+					<ToolbarMenuItem>تهیه نسخه پشتیبان</ToolbarMenuItem>
 				</ToolbarMenu>
 				<Button
 					on:click={() => {
@@ -123,9 +124,9 @@
 				</div>
 			{/each}
 		</div>
-	</div>
+	</div> -->
 
-	<!-- {#if $rows}
+	{#if $rows}
 		<DataTable
 			style="width:100%"
 			title="لیست کارکنان"
@@ -214,9 +215,6 @@
 		{#if open}
 			<AddUser bind:open initial={dataUpdate} />
 		{/if}
-		{#if openDeveloper}
-			<Developer bind:open={openDeveloper} />
-		{/if}
 		<Modal
 			bind:open={openUser}
 			size="lg"
@@ -293,7 +291,7 @@
 		>
 			<p>با حذف {dataDelete.name} {dataDelete.family} اطلاعات این کتاب قابل بازگشت نیست.</p>
 		</Modal>
-	{/if} -->
+	{/if}
 	<Modal
 		bind:open={showImportData}
 		modalHeading="وارد کردن اطلاعات"
@@ -339,89 +337,12 @@
 </section>
 
 <style>
-	.dashboard {
+	.peopleBox {
 		display: flex;
 		width: 100%;
 		height: auto;
+		flex-direction: column;
 		/* background-color: var(--cds-layer, #fff); */
-	}
-	.books {
-		display: flex;
-		padding: 20px 20px 0 0;
-		flex-wrap: wrap;
-		width: 100%;
-		height: auto;
-	}
-	.booksItem {
-		width: 20%;
-		padding-bottom: 20px;
-		padding-left: 20px;
-	}
-	@media (max-width: 1100px) {
-		.booksItem {
-			width: 25%;
-		}
-	}
-	@media (max-width: 900px) {
-		.booksItem {
-			width: 33.33%;
-		}
-	}
-	@media (max-width: 600px) {
-		.booksItem {
-			width: 50%;
-		}
-	}
-	@media (max-width: 400px) {
-		.booksItem {
-			width: 100%;
-		}
-	}
-	.book {
-		background-color: #f4f4f4;
-	}
-	.bookCover {
-		height: auto;
-		width: 100%;
-		position: relative;
-		margin-bottom: 10px;
-	}
-	.bookCover img:nth-child(1) {
-		width: 100%;
-		height: auto;
-	}
-	.bookCover img:nth-child(2) {
-		width: 100%;
-		height: auto;
-		padding: 0 34.1%;
-		position: absolute;
-		top: 0;
-		right: 0;
-		left: 0;
-		bottom: 0;
-		margin: auto;
-	}
-	.bookContent {
-		padding: 0 20px 5px;
-	}
-	.bookContent h4 {
-		font-weight: bold;
-		margin-bottom: 10px;
-	}
-	.bookContent p {
-		color: #1d1d1d;
-		font-size: 13px;
-		padding: 0 2.5px;
-		margin-bottom: 5px;
-	}
-	.bookContent div {
-		display: flex;
-		margin: 0 -2.5px;
-		justify-content: space-between;
-		flex-wrap: wrap;
-	}
-	.bookContent b {
-		font-weight: bold;
 	}
 	.showUserHeader {
 		font-size: 26px;
