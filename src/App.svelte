@@ -17,7 +17,8 @@
 	// import '/global.css';
 
 	let theme = 'white', // "white" | "g10" | "g80" | "g90" | "g100"
-		showPage = 'people',
+		// showPage = 'people',
+		showPage = 'library',
 		openDeveloper = false;
 
 	$: document.documentElement.setAttribute('theme', theme);

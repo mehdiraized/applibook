@@ -12,70 +12,70 @@
 		FileUploaderDropContainer,
 		FileUploaderItem
 	} from 'carbon-components-svelte';
-	// import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
-	// import Edit from 'carbon-icons-svelte/lib/Edit.svelte';
 	import Add from 'carbon-icons-svelte/lib/Add.svelte';
 	import DocumentImport from 'carbon-icons-svelte/lib/DocumentImport.svelte';
-	// import AddBook from './Components/AddBook.svelte';
+	import AddBook from './Components/AddBook.svelte';
 	import Book from './Components/Book.svelte';
 	import { db } from './db';
 
-	let count = liveQuery(() => db.users.count());
-	let rows = liveQuery(() => db.users.toArray());
+	let count = liveQuery(() => db.books.count());
+	let rows = liveQuery(() => db.books.toArray());
 
 	let showImportData = false,
+		showAddBook = true,
+		bookUpdate = null,
 		fileForImport = null,
 		filteredRowIds = [];
 </script>
 
 <section class="libraryBox">
-	<div>
-		<Toolbar size="lg">
-			<ToolbarContent>
-				<ToolbarSearch
-					placeholder="جستجو کتاب (نام کتاب یا نویسنده)"
-					persistent
-					value=""
-					bind:filteredRowIds
-				/>
-				<!-- 
+	<Toolbar size="lg">
+		<ToolbarContent>
+			<ToolbarSearch
+				placeholder="جستجو کتاب (نام کتاب یا نویسنده)"
+				persistent
+				value=""
+				bind:filteredRowIds
+			/>
+			<!-- 
 					shouldFilterRows={(row, value) => {
 						return /(6|8)$/.test(row.name) && row.rule.toLowerCase().includes(value.toLowerCase());
 					}} -->
-				<ToolbarMenu>
-					<ToolbarMenuItem
-						on:click={() => {
-							showImportData = true;
-						}}
-					>
-						وارد کردن کتاب
-					</ToolbarMenuItem>
-					<ToolbarMenuItem>تهیه نسخه پشتیبان</ToolbarMenuItem>
-				</ToolbarMenu>
-				<Button
+			<ToolbarMenu>
+				<ToolbarMenuItem
 					on:click={() => {
-						open = true;
+						showImportData = true;
 					}}
-					icon={Add}
 				>
-					افزودن کتاب
-				</Button>
-			</ToolbarContent>
-		</Toolbar>
+					وارد کردن کتاب
+				</ToolbarMenuItem>
+				<ToolbarMenuItem>تهیه نسخه پشتیبان</ToolbarMenuItem>
+			</ToolbarMenu>
+			<Button
+				on:click={() => {
+					showAddBook = true;
+				}}
+				icon={Add}
+			>
+				افزودن کتاب
+			</Button>
+		</ToolbarContent>
+	</Toolbar>
+	{#if $rows && $rows.length > 0}
 		<div class="books">
-			{#each new Array(100) as item}
+			{#each $rows as item}
 				<div class="booksItem">
 					<Book
-						title="اسم کتاب"
-						image="./img/Cover.png"
-						date="1360"
-						publisher="فخیم"
-						author="عبد الله موحد"
+						name={item.name}
+						image={item.image}
+						year={item.year}
+						publisher={item.publishers}
+						author={item.author}
 					/>
 				</div>
 			{/each}
 		</div>
-	</div>
+	{/if}
 	<Modal
 		bind:open={showImportData}
 		modalHeading="وارد کردن اطلاعات"
@@ -118,6 +118,9 @@
 			/>
 		{/if}
 	</Modal>
+	{#if showAddBook}
+		<AddBook bind:open={showAddBook} initial={bookUpdate} />
+	{/if}
 </section>
 
 <style>
@@ -125,6 +128,7 @@
 		display: flex;
 		width: 100%;
 		height: auto;
+		flex-direction: column;
 	}
 	.books {
 		display: flex;

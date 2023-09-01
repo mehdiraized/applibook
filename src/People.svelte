@@ -74,72 +74,19 @@
 </script>
 
 <section class="peopleBox">
-	<!-- <div>
-		<Toolbar size="lg">
-			<ToolbarContent>
-				<ToolbarSearch
-					placeholder="جستجو کتاب (نام کتاب یا نویسنده)"
-					persistent
-					value=""
-					bind:filteredRowIds
-				/>
-				<ToolbarMenu>
-					<ToolbarMenuItem
-						on:click={() => {
-							showImportData = true;
-						}}
-					>
-						وارد کردن کتاب
-					</ToolbarMenuItem>
-					<ToolbarMenuItem>تهیه نسخه پشتیبان</ToolbarMenuItem>
-				</ToolbarMenu>
-				<Button
-					on:click={() => {
-						dataUpdate = false;
-						open = true;
-					}}
-					icon={Add}
-				>
-					افزودن کتاب
-				</Button>
-			</ToolbarContent>
-		</Toolbar>
-		<div class="books">
-			{#each new Array(100) as item}
-				<div class="booksItem">
-					<div class="book">
-						<figure class="bookCover">
-							<img src="./mockup.png" alt="" />
-							<img src="./img/Cover.png" alt="" />
-						</figure>
-						<div class="bookContent">
-							<h4>اسم کتاب</h4>
-							<div>
-								<p>سال انتشار <b>۱۳۶۰</b></p>
-								<p>انتشارات <b>فخیم</b></p>
-								<p>نویسنده <b>عبد الله موحد</b></p>
-							</div>
-						</div>
-					</div>
-				</div>
-			{/each}
-		</div>
-	</div> -->
-
 	{#if $rows}
 		<DataTable
 			style="width:100%"
-			title="لیست کارکنان"
-			description={`${$count} مورد یافت شد`}
 			headers={[
 				{ key: 'num', value: 'ردیف', width: '45px' },
 				{ key: 'name', value: 'نام' },
-				{ key: 'family', value: 'شهرت' },
+				{ key: 'family', value: 'نام خانوادگی' },
+				{ key: 'book', value: 'کتاب' },
+				{ key: 'startDate', value: 'تاریخ دریافت' },
+				{ key: 'arriveDate', value: 'تاریخ تحویل' },
 				{ key: 'nationalCode', value: 'کد ملی' },
 				{ key: 'unit', value: 'محل خدمت' },
 				{ key: 'rank', value: 'درجه' },
-				{ key: 'hiringDate', value: 'تاریخ استخدام' },
-				{ key: 'personnelId', value: 'شماره پرسنلی' },
 				{ key: 'phone', value: 'تلفن همراه' },
 				{ key: 'action', value: '', width: '206px', padding: '0' }
 			]}
@@ -203,6 +150,35 @@
 					{cell.value}
 				{/if}
 			</svelte:fragment>
+			<Toolbar size="lg">
+				<ToolbarContent>
+					<ToolbarSearch
+						placeholder="جستجو (نام کتاب گیرنده)"
+						persistent
+						value=""
+						bind:filteredRowIds
+					/>
+					<ToolbarMenu>
+						<ToolbarMenuItem
+							on:click={() => {
+								showImportData = true;
+							}}
+						>
+							وارد کردن اطلاعات
+						</ToolbarMenuItem>
+						<ToolbarMenuItem>تهیه نسخه پشتیبان</ToolbarMenuItem>
+					</ToolbarMenu>
+					<Button
+						on:click={() => {
+							dataUpdate = false;
+							open = true;
+						}}
+						icon={Add}
+					>
+						کتاب گیرنده جدید
+					</Button>
+				</ToolbarContent>
+			</Toolbar>
 		</DataTable>
 		<div style="direction:ltr; display: flex; justify-content: center;">
 			<PaginationNav
@@ -215,64 +191,6 @@
 		{#if open}
 			<AddUser bind:open initial={dataUpdate} />
 		{/if}
-		<Modal
-			bind:open={openUser}
-			size="lg"
-			modalHeading="نمایش اطلاعات کتاب"
-			primaryButtonText="چاپ"
-			primaryButtonIcon={Printer}
-			secondaryButtonText="بستن"
-			on:open
-			on:close={() => {
-				openUser = false;
-				dataUser = false;
-				childrenData = [];
-			}}
-			on:submit={() => {
-				window.print();
-			}}
-		>
-			{#if dataUser}
-				<div class="showUserHeader">{dataUser.name} {dataUser.family}</div>
-				<ul class="showUserList">
-					<li>کد ملی : <b>{dataUser.nationalCode || 'وارد نشده'}</b></li>
-					<li>توضیحات : <b>{dataUser.description || 'وارد نشده'}</b></li>
-					<li>آدرس : <b>{dataUser.address || 'وارد نشده'}</b></li>
-					<li>تاریخ تولد : <b>{dataUser.birthday || 'وارد نشده'}</b></li>
-					<li>تحصیلات : <b>{dataUser.education || 'وارد نشده'}</b></li>
-					<li>شماره پرسنلی : <b>{dataUser.personnelId || 'وارد نشده'}</b></li>
-					<li>تاریخ استخدام : <b>{dataUser.hiringDate || 'وارد نشده'}</b></li>
-					<li>شماره تماس : <b>{dataUser.phone || 'وارد نشده'}</b></li>
-					<li>درجه : <b>{dataUser.rank || 'وارد نشده'}</b></li>
-					<li>یگان : <b>{dataUser.unit || 'وارد نشده'}</b></li>
-				</ul>
-				{#if dataUser.wife}
-					<div class="showUserHeader2">اطلاعات همسر</div>
-					<ul class="showUserList">
-						<li>همسر : <b>{dataUser.wifeName} {dataUser.wifeFamily}</b></li>
-						<li>سن همسر : <b>{dataUser.wifeBirthday || 'وارد نشده'}</b></li>
-						<li>تحصیلات همسر : <b>{dataUser.wifeEducation || 'وارد نشده'}</b></li>
-						<li>تخصص همسر : <b>{dataUser.wifeSpecialty || 'وارد نشده'}</b></li>
-						<li>شغل همسر : <b>{dataUser.wifeJob || 'وارد نشده'}</b></li>
-						<li>سال ازدواج : <b>{dataUser.yearMarriage || 'وارد نشده'}</b></li>
-					</ul>
-				{/if}
-				{#if childrenData.length > 0}
-					<div class="showUserHeader2">اطلاعات فرزندان</div>
-					{#each childrenData as child}
-						<ul class="showUserList2">
-							<li>نام : <b>{child.name || 'وارد نشده'}</b></li>
-							<li>جنسیت : <b>{child.sex || 'وارد نشده'}</b></li>
-							<li>تاریخ تولد : <b>{child.birthday || 'وارد نشده'}</b></li>
-							<li>تحصیلات : <b>{child.education || 'وارد نشده'}</b></li>
-							<li>وضعیت تاهل : <b>{child.married || 'وارد نشده'}</b></li>
-							<li>تخصص : <b>{child.specialty || 'وارد نشده'}</b></li>
-							<li>توضیحات : <b>{child.description || 'وارد نشده'}</b></li>
-						</ul>
-					{/each}
-				{/if}
-			{/if}
-		</Modal>
 		<Modal
 			danger
 			bind:open={openDelete}
@@ -342,31 +260,8 @@
 		width: 100%;
 		height: auto;
 		flex-direction: column;
+		margin-top: -2px;
 		/* background-color: var(--cds-layer, #fff); */
-	}
-	.showUserHeader {
-		font-size: 26px;
-		text-align: center;
-		margin-bottom: 30px;
-	}
-	.showUserHeader2 {
-		font-size: 20px;
-		text-align: right;
-		margin-bottom: 15px;
-		margin-top: 30px;
-		font-weight: bold;
-	}
-	.showUserList {
-		line-height: 32px;
-		columns: 3;
-	}
-	.showUserList2 {
-		line-height: 32px;
-		columns: 4;
-	}
-	.showUserList b,
-	.showUserList2 b {
-		font-weight: bold;
 	}
 	:global(.bx--file-browse-btn),
 	:global(.bx--file__selected-file) {

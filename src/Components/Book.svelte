@@ -1,5 +1,8 @@
 <script>
-	export let title, image, date, publisher, author;
+	import TrashCan from 'carbon-icons-svelte/lib/TrashCan.svelte';
+	import Edit from 'carbon-icons-svelte/lib/Edit.svelte';
+
+	export let name, image, year, publisher, author;
 </script>
 
 <div class="book">
@@ -8,9 +11,9 @@
 		<img src={image} alt="" />
 	</figure>
 	<div class="bookContent">
-		<h4>{title}</h4>
+		<h4>{name}</h4>
 		<div>
-			<p>سال انتشار <b>{date}</b></p>
+			<p>سال انتشار <b>{year}</b></p>
 			<p>انتشارات <b>{publisher}</b></p>
 			<p>نویسنده <b>{author}</b></p>
 		</div>
@@ -33,14 +36,16 @@
 	}
 	.bookCover img:nth-child(2) {
 		width: 100%;
-		height: auto;
-		padding: 0 34.1%;
+		height: 100%;
+		/* padding: 15.8% 34% 16.9% 34.2%; */
+		padding: 15% 34.1% 16%;
 		position: absolute;
 		top: 0;
 		right: 0;
 		left: 0;
 		bottom: 0;
 		margin: auto;
+		object-fit: cover;
 	}
 	.bookContent {
 		padding: 0 20px 5px;
